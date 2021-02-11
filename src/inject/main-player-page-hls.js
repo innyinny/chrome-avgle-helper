@@ -33,9 +33,9 @@ function main(utils, parameters = {}) {
 			const arr = [];
 			try {
 				const segments = player.tech_.hls.playlists.media_.segments;
-				segments.forEach(x => arr.push({ uri: x.resolvedUri }));
-				arr.forEach(videojs.Hls.xhr.beforeRequest);
-				arr.forEach(x => typeof x.decryptURI === 'function' && x.decryptURI());
+				// Workaround for new avgle checks: https://github.com/download-online-video/chrome-avgle-helper/issues/54#issuecomment-763986262
+				segments.forEach(x => arr.push({ uri: x.resolvedUri, method: "HEAD", timeout: 50 }));
+				arr.forEach(x => x.uri = videojs.Hls.xhr(x, function(){}).uri);
 			} catch (error) {
 				return logError(error);
 			}
