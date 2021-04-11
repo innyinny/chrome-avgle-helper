@@ -336,8 +336,6 @@ function _download() {
 			"$ARIA2C_BIN" "$referer" --user-agent="$CFG_USER_AGENT" \
 				--console-log-level=warn --log-level=debug \
 				--max-download-result="${CFG_MAX_CONCURRENT_DL}" \
-				--keep-unfinished-download-result=true \
-				--enable-color=false \
 				--summary-interval=120 \
 				--show-files --continue=true --input-file=- "$ARIA2C_OPT_J" \
 				--log="$DOWNLOAD_LOG" --log-level=info;
